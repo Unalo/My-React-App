@@ -30,6 +30,7 @@ import './index.css';
     );
   }
 
+  
   // Board state is in control of square/insync with each other
   class Board extends React.Component {
     // setting state (private)
