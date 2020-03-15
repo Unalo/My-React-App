@@ -19,23 +19,34 @@ import './index.css';
 //       );
 //     }
 //   }
+
+// function companent with render method only, doesn't have own state 
   function Square (props) {
     return (
+      // onclick event will call click event from renderSquare
       <button className="square" onClick = {props.onClick}>
         {props.value}
       </button>
     );
   }
+
+  // Board state is in control of square/insync with each other
   class Board extends React.Component {
+    // setting state (private)
     constructor(props) {
       super(props);
       this.state = {
         squares : Array(9).fill(null),
+        // setting first move 
         xIsNext: false,
       };
     }
+    // handle clicks
     handleClick (i) {
+      // creating a copy of squares to modify, avoiding modifying the existing Array 
+      // to Achieve immutability
       const squares = this.state.squares.slice();
+      // updating xIsNext to take turns
       squares[i] = this.state.xIsNext ? 'X' : 'O';
       this.setState({
         squares : squares,
@@ -93,13 +104,13 @@ import './index.css';
       );
     }
   }
-  
   // ========================================
   
   ReactDOM.render(
     <Game />,
     document.getElementById('root')
   );
+  // finding winner 
   function calculateWinner(squares) {
     const lines = [
       [0, 1, 2],
