@@ -29,6 +29,35 @@ import './index.css';
       </button>
     );
   }
+  class NameForm extends React.Component {
+    constructor(props) {
+      super(props);
+      this.handleSubmit = this.handleSubmit.bind(this);
+      this.input = React.createRef();
+    }
+  
+    handleSubmit(event) {
+      alert('A name was submitted: ' + this.input.current.value);
+      event.preventDefault();
+    }
+  
+    render() {
+      return (
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Name:
+            <input type="text" ref={this.input} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+      );
+    }
+  }
+  
+  ReactDOM.render(
+    <NameForm />,
+    document.getElementById('root2')
+  );
 
   
   // Board state is in control of square/insync with each other
@@ -39,7 +68,7 @@ import './index.css';
       this.state = {
         squares : Array(9).fill(null),
         // setting first move 
-        xIsNext: false,
+        xIsNext: true,
       };
     }
     // handle clicks
@@ -130,4 +159,4 @@ import './index.css';
       }
     }
     return null;
-  }
+  } 
